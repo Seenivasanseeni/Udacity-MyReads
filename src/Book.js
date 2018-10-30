@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 function Book(props){
-    const {book}=props;
+    const {book,updateCategory}=props;
     return (
             <div className="book">
                 <div className="book-top">
@@ -9,8 +9,10 @@ function Book(props){
                     width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.thumbnail})`
                     }}></div>
                 <div className="book-shelf-changer">
-                    <select>
-                    <option value="move" disabled>Move to...</option>
+                    <select onChange={(event)=>{
+                        updateCategory(book.id,"read");
+                    }}>
+                    <option value="move" >Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>

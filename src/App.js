@@ -24,6 +24,7 @@ class BooksApp extends React.Component {
        })
   }
   updateCategory(bookId,toCategory){
+    toCategory=toCategory.trim();
     this.setState((prevState)=>{
        return {
           books: prevState.books.map(book=>{
@@ -70,10 +71,10 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} category="wantToRead" />
-                <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" category="currentlyReading" />
-                <BookShelf books={readBooks} categoryName={"Read"} category="read" />
-                <BookShelf books={noneBooks} categoryName={"Not Assigned"} category="non" />
+                <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} category="wantToRead" updateCategory={this.updateCategory}/>
+                <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" category="currentlyReading" updateCategory={this.updateCategory} />
+                <BookShelf books={readBooks} categoryName={"Read"} category="read" updateCategory={this.updateCategory} />
+                <BookShelf books={noneBooks} categoryName={"Not Assigned"} category="none" updateCategory={this.updateCategory} />
               </div>
             </div>
             <div className="open-search">
