@@ -21,7 +21,7 @@ class SearchBooks extends React.Component {
   
   getMatchingBooks(){
       var matcher=new RegExp(escapeRegExp(this.state.query),'i');
-      var matchedBooks=this.props.books.filter(book=>matcher.test(book));
+      var matchedBooks=this.props.books.filter(book=>matcher.test(book.title));
       console.log(matchedBooks.map(book=>{
           return book.id;
       }))
