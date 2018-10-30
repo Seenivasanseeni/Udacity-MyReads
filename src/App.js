@@ -36,6 +36,7 @@ class BooksApp extends React.Component {
     })
   }
   render() {
+    console.log(this);
     const readBooks=this.state.books.filter(book=>book.shelf.trim()=="read");
     const currentlyReadingBooks=this.state.books.filter(book=>book.shelf.trim()=="currentlyReading");
     const wantToReadBooks=this.state.books.filter(book=>book.shelf.trim()=="wantToRead");
