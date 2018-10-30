@@ -1,6 +1,7 @@
 import React from 'react'
 import BookShelf from './BookShelf';
 import escapeRegExp from 'escape-string-regexp'
+import {Link} from 'react-router-dom'
 
 class SearchBooks extends React.Component {
 
@@ -22,9 +23,6 @@ class SearchBooks extends React.Component {
   getMatchingBooks(){
       var matcher=new RegExp(escapeRegExp(this.state.query),'i');
       var matchedBooks=this.props.books.filter(book=>matcher.test(book.title));
-      console.log(matchedBooks.map(book=>{
-          return book.id;
-      }))
       return matchedBooks;
   }
   
@@ -37,7 +35,7 @@ class SearchBooks extends React.Component {
     return (
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search">Close</a>
+              <Link className="close-search" to="/">Close</Link>
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.

@@ -25,7 +25,6 @@ class BooksApp extends React.Component {
     })
   }
   updateCategory(bookId,toCategory){
-    console.log("For",bookId,"Cat",toCategory);
     toCategory=toCategory.trim();
     this.setState((prevState)=>{
        return {
@@ -38,7 +37,6 @@ class BooksApp extends React.Component {
     })
   }
   render() {
-    console.log(this.state.books);
     const readBooks=this.state.books.filter(book=>book.shelf.trim()=="read");
     const currentlyReadingBooks=this.state.books.filter(book=>book.shelf.trim()=="currentlyReading");
     const wantToReadBooks=this.state.books.filter(book=>book.shelf.trim()=="wantToRead");
@@ -57,9 +55,7 @@ class BooksApp extends React.Component {
           </div>
         </div>
         <div className="open-search">
-          <Link to="search" onClick={({history})=>{
-            history.pushState("/");
-          }} >Add a book</Link>
+          <Link to="/search" >Add a book</Link>
         </div>
     </div>
     );
