@@ -3,13 +3,11 @@ import BookShelf from './BookShelf';
 import escapeRegExp from 'escape-string-regexp'
 
 class SearchBooks extends React.Component {
-  constructor(props){
-      super();
-      this.state={
-          books: props.books,
-          query:''
-      }
-  }
+
+  state={
+    query:''
+   }
+
   updateQuery(queryFromUser){
     this.setState({
         query:queryFromUser
@@ -22,8 +20,11 @@ class SearchBooks extends React.Component {
   }
   
   getMatchingBooks(){
-      const matcher=new RegExp(escapeRegExp(this.state.query),'i');
-      var matchedBooks=this.state.books.filer(book=>matcher.match(book));
+      var matcher=new RegExp(escapeRegExp(this.state.query),'i');
+      var matchedBooks=this.props.books.filter(book=>matcher.test(book));
+      console.log(matchedBooks.map(book=>{
+          return book.id;
+      }))
       return matchedBooks;
   }
   
@@ -34,10 +35,9 @@ class SearchBooks extends React.Component {
   render() {
     const matchedBooks=this.getMatchingBooks();
     return (
-      <div className="app">
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <a className="close-search">Close</a>
               <div className="search-books-input-wrapper">
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -56,9 +56,8 @@ class SearchBooks extends React.Component {
                <BookShelf categoryName="Search Results" books={matchedBooks}  updateCategory={this.updateCategoryHanlder}/>
             </div>
           </div>
-      </div>
     )
   }
 }
 
-export default BooksApp
+export default SearchBooks

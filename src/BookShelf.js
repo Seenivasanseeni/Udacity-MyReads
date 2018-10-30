@@ -9,7 +9,6 @@ class BookShelf extends Component {
     }  
 
     render(){
-        console.log(this);
         const {books,category,categoryName,updateCategory}=this.props;
         return ( 
         <div className="bookshelf">
