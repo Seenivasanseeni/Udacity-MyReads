@@ -18,9 +18,9 @@ class BooksApp extends React.Component {
   }
   
   render() {
-    const readBooks=this.state.books.filter(book=>book.shelf.trim()==="read");
-    const currentlyReadingBooks=this.state.books.filter(book=>book.shelf.trim()==="currentlyReading");
-    const wantToReadBooks=this.state.books.filter(book=>book.shelf.trim()==="wantToRead");
+    const readBooks=this.state.books.filter(book=>book.shelf.trim()=="read");
+    const currentlyReadingBooks=this.state.books.filter(book=>book.shelf.trim()=="currentlyReading");
+    const wantToReadBooks=this.state.books.filter(book=>book.shelf.trim()=="wantToRead");
     const noneBooks=this.state.books.filter(book=>book.shelf.trim()!=="wantToRead"&&book.shelf.trim()!=="currentlyReading"&&book.shelf.trim()!=="read");
  
     return (
@@ -53,9 +53,10 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" category="currentlyReading" />
                 <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} category="wantToRead" />
-                <BookShelf books={wantToReadBooks} categoryName={"Reading"} category="read" />
+                <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" category="currentlyReading" />
+                <BookShelf books={readBooks} categoryName={"Read"} category="read" />
+                <BookShelf books={noneBooks} categoryName={"Not Assigned"} category="non" />
               </div>
             </div>
             <div className="open-search">
