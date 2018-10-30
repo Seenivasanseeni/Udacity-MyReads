@@ -10,7 +10,7 @@ function BookShelf(props){
             <div className="bookshelf-books">
                 <ol className="books-grid">
                     {books.map(book=>{
-                        return <li>
+                        return <li key={book.id}>
                             <Book book={book} />
                         </li>
                     })}
