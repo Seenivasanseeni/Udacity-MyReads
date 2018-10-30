@@ -22,14 +22,7 @@ class BooksApp extends React.Component {
       this.setState({
         books
       })
-/*      //testing purpose
-        var curTestIndex=1;
-        var curTestobject=this.state.books[curTestIndex];
-        console.log("Initial Object  ", curTestobject.title, "is in ",curTestobject.shelf);
-        this.updateCategory(curTestobject.id,"read");
-        console.log("Initial Object  ", curTestobject.title, "is in ",curTestobject.shelf);
-    */
-       })
+    })
   }
   updateCategory(bookId,toCategory){
     console.log("For",bookId,"Cat",toCategory);
