@@ -14,9 +14,26 @@ class BooksApp extends React.Component {
       this.setState({
         books
       })
+/*      //testing purpose
+        var curTestIndex=1;
+        var curTestobject=this.state.books[curTestIndex];
+        console.log("Initial Object  ", curTestobject.title, "is in ",curTestobject.shelf);
+        this.updateCategory(curTestobject.id,"read");
+        console.log("Initial Object  ", curTestobject.title, "is in ",curTestobject.shelf);
+    */
+       })
+  }
+  updateCategory(bookId,toCategory){
+    this.setState((prevState)=>{
+       return {
+          books: prevState.books.map(book=>{
+            if(book.id==bookId)
+              book.shelf=toCategory;
+            return book;
+            })
+      }
     })
   }
-  
   render() {
     const readBooks=this.state.books.filter(book=>book.shelf.trim()=="read");
     const currentlyReadingBooks=this.state.books.filter(book=>book.shelf.trim()=="currentlyReading");
