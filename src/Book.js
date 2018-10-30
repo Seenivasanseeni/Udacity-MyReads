@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 
 function Book(props){
     const {book}=props;
-    console.log(book);
     return (
             <div className="book">
                 <div className="book-top">
