@@ -2,9 +2,16 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelf from './BookShelf';
+import Route from 'react-router-dom'
 
 class BooksApp extends React.Component {
   
+  constructor(){
+    super();
+    this.updateCategory=this.updateCategory.bind(this);
+    this.setState=this.setState.bind(this);
+  }
+
   state = {
     books:[] 
   }
@@ -24,6 +31,7 @@ class BooksApp extends React.Component {
        })
   }
   updateCategory(bookId,toCategory){
+    console.log("For",bookId,"Cat",toCategory);
     toCategory=toCategory.trim();
     this.setState((prevState)=>{
        return {

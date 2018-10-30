@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 
 class Book extends Component{
+    updateCategoryHanlder=(e)=>{
+        this.props.updateCategory(this.props.book.id
+            ,e.target.value);
+    }  
     render(){
         const {book,updateCategory}=this.props;
         return (
@@ -10,10 +14,7 @@ class Book extends Component{
                         width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.thumbnail})`
                         }}></div>
                     <div className="book-shelf-changer">
-                        <select onChange={(event)=>{
-                            console.log(this);
-                            updateCategory(book.id,"read");
-                        }}>
+                        <select onChange={this.updateCategoryHanlder}>
                         <option value="move" >Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

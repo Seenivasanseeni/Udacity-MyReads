@@ -3,6 +3,11 @@ import Book from './Book'
 
 
 class BookShelf extends Component {
+      
+    updateCategoryHanlder=(bookId,category)=>{
+        this.props.updateCategory(bookId,category);
+    }  
+
     render(){
         console.log(this);
         const {books,category,categoryName,updateCategory}=this.props;
@@ -13,7 +18,7 @@ class BookShelf extends Component {
                     <ol className="books-grid">
                         {books.map(book=>{
                             return <li key={book.id}>
-                                <Book book={book}  updateCategory={updateCategory} />
+                                <Book book={book}  updateCategory={this.updateCategoryHanlder} />
                             </li>
                         })}
                 </ol>
