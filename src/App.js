@@ -16,8 +16,13 @@ class BooksApp extends React.Component {
       })
     })
   }
-
+  
   render() {
+    const readBooks=this.state.books.filter(book=>book.shelf.trim()==="read");
+    const currentlyReadingBooks=this.state.books.filter(book=>book.shelf.trim()==="currentlyReading");
+    const wantToReadBooks=this.state.books.filter(book=>book.shelf.trim()==="wantToRead");
+    const noneBooks=this.state.books.filter(book=>book.shelf.trim()!=="wantToRead"&&book.shelf.trim()!=="currentlyReading"&&book.shelf.trim()!=="read");
+ 
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -48,7 +53,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-               <BookShelf books={this.state.books} category={"Want to Read"}/>
+                <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" category="currentlyReading" />
+                <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} category="wantToRead" />
+                <BookShelf books={wantToReadBooks} categoryName={"Reading"} category="read" />
               </div>
             </div>
             <div className="open-search">
