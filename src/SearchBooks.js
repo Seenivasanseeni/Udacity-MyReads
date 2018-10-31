@@ -1,6 +1,5 @@
 import React from 'react'
 import BookShelf from './BookShelf';
-import escapeRegExp from 'escape-string-regexp'
 import {Link} from 'react-router-dom'
 
 class SearchBooks extends React.Component {
