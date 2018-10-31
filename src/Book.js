@@ -3,7 +3,10 @@ import * as BooksAPI from './BooksAPI'
 
 class Book extends Component{
     updateCategoryHanlder=(e)=>{
-        BooksAPI.update(this.props.book,e.target.value);
+        BooksAPI.update(this.props.book,e.target.value).then(()=>{
+            console.log("Refreshing");
+            this.props.refreshApp();
+        });
     }  
     render(){
         const {book}=this.props;

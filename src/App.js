@@ -10,13 +10,22 @@ class BooksApp extends React.Component {
   constructor(){
     super();
     this.setState=this.setState.bind(this);
+    this.refreshApp=this.refreshApp.bind(this);
   }
 
   state = {
-    books:[] 
+    books:[],
   }
 
   componentDidMount(){
+    this.populateBooks();  
+  }
+  
+  refreshApp(){
+    this.populateBooks();    
+  }
+
+  populateBooks(){
     BooksAPI.getAll().then(books=>{
       this.setState({
         books
@@ -36,10 +45,10 @@ class BooksApp extends React.Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf books={wantToReadBooks} categoryName={"Want To Read"}  />
-            <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading"  />
-            <BookShelf books={readBooks} categoryName={"Read"}   />
-            <BookShelf books={noneBooks} categoryName={"Not Assigned"}   />
+            <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} refreshApp={this.refreshApp} />
+            <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" refreshApp={this.refreshApp} />
+            <BookShelf books={readBooks} categoryName={"Read"}  refreshApp={this.refreshApp} />
+            <BookShelf books={noneBooks} categoryName={"Not Assigned"} refreshApp={this.refreshApp}  />
           </div>
         </div>
         <div className="open-search">
