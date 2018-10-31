@@ -5,7 +5,8 @@ class Book extends Component{
     updateCategoryHanlder=(e)=>{
         BooksAPI.update(this.props.book,e.target.value).then(()=>{
             console.log("Refreshing");
-            this.props.refreshApp();
+            if(this.props.refreshApp)
+                this.props.refreshApp();
         });
     }  
     render(){
