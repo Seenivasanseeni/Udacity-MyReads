@@ -18,13 +18,9 @@ class SearchBooks extends React.Component {
 
   updateQuery(queryFromUser){
     const query = queryFromUser.trim();
-    //console.log("Updating query ",this.state.query,"due to ",queryFromUser);
     this.setState({
       query:query
-    })
-    //console.log("Updating query ",this.state.query,"due to ",queryFromUser);
-    //console.log(this.state);
-    this.populateSearchResults(query);
+    },this.populateSearchResults);
   }
 
   clearQuery(){
@@ -33,23 +29,23 @@ class SearchBooks extends React.Component {
       })
   }
 
-  populateSearchResults(query){
+  populateSearchResults(){
+    const query=this.state.query;
     BooksAPI.search(query).then(books=>{
-      console.log("for query" ,query,"From Network",books);
+      //console.log("for query" ,query,"From Network",books);
       if(books==undefined || books.error){
-        console.log("No matching Results");
+        console.log("No matching Results for query ",query);
         return;
       }
       this.setState({
         books
       })  
     }).catch((err)=>{
-      //console.log("Error ",err);
+      console.log("Error ",err);
     })
   }
   
   render() {
-    //console.log("books passed",this.state);
     return (
           <div className="search-books">
             <div className="search-books-bar">
