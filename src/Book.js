@@ -3,15 +3,15 @@ import * as BooksAPI from './BooksAPI'
 
 class Book extends Component{
     updateCategoryHanlder=(e)=>{
-        //BooksAPI.update(this.pr)
+        BooksAPI.update(this.props.book,e.target.value);
     }  
     render(){
-        const {book,updateCategory}=this.props;
+        const {book}=this.props;
         return (
                 <div className="book">
                     <div className="book-top">
                     <div className="book-cover" style={{ 
-                        width: 128, height: 193, backgroundImage:  `url(${book.imageLinks.thumbnail})`
+                        width: 128, height: 193, backgroundImage:  `url(${book.imageLinks!=undefined && book.imageLinks.thumbnail })`
                         }}></div>
                     <div className="book-shelf-changer">
                         <select onChange={this.updateCategoryHanlder}>

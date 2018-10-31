@@ -1,25 +1,56 @@
 import React from 'react'
 import BookShelf from './BookShelf';
 import {Link} from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends React.Component {
 
+  constructor(props){
+    super();
+    this.updateQuery =  this.updateQuery.bind(this);
+    this.setState=this.setState.bind(this);
+  }
+
   state={
-    query:''
-   }
+    query:"",
+    books:[]
+  }
 
   updateQuery(queryFromUser){
+    const query = queryFromUser.trim();
+    console.log("Updating query ",this.state.query,"due to ",queryFromUser);
     this.setState({
-        query:queryFromUser.trim()
+      query:query
     })
+    console.log("Updating query ",this.state.query,"due to ",queryFromUser);
+    console.log(this.state);
+    this.populateSearchResults();
   }
+
   clearQuery(){
       this.setState({
           query:''
       })
   }
+
+  populateSearchResults(){
+    var query=this.state.query;
+    BooksAPI.search(query).then(books=>{
+      console.log("for query" ,query,"From Network",books);
+      if(books==undefined){
+        console.log("No matching Results");
+        return;
+      }
+      this.setState({
+        books
+      })  
+    }).catch((err)=>{
+      console.log("Error ",err);
+    })
+  }
   
   render() {
+    console.log("books passed",this.state);
     return (
           <div className="search-books">
             <div className="search-books-bar">
