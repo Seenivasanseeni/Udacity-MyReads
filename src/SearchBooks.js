@@ -20,18 +20,7 @@ class SearchBooks extends React.Component {
       })
   }
   
-  getMatchingBooks(){
-      var matcher=new RegExp(escapeRegExp(this.state.query),'i');
-      var matchedBooks=this.props.books.filter(book=>matcher.test(book.title));
-      return matchedBooks;
-  }
-  
-  updateCategoryHanlder=(bookId,category)=>{
-    this.props.updateCategory(bookId,category);
-  }  
-
   render() {
-    const matchedBooks=this.getMatchingBooks();
     return (
           <div className="search-books">
             <div className="search-books-bar">
@@ -51,7 +40,7 @@ class SearchBooks extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
-               <BookShelf categoryName="Search Results" books={matchedBooks}  updateCategory={this.updateCategoryHanlder}/>
+               <BookShelf categoryName="Search Results" books={this.state.books} />
             </div>
           </div>
     )

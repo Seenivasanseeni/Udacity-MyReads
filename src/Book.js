@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
+import * as BooksAPI from './BooksAPI'
 
 class Book extends Component{
     updateCategoryHanlder=(e)=>{
-        this.props.updateCategory(this.props.book.id
-            ,e.target.value);
+        //BooksAPI.update(this.pr)
     }  
     render(){
         const {book,updateCategory}=this.props;
