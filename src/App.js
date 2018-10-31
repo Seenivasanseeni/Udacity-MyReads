@@ -48,7 +48,6 @@ class BooksApp extends React.Component {
             <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} refreshApp={this.refreshApp} />
             <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" refreshApp={this.refreshApp} />
             <BookShelf books={readBooks} categoryName={"Read"}  refreshApp={this.refreshApp} />
-            <BookShelf books={noneBooks} categoryName={"Not Assigned"} refreshApp={this.refreshApp}  />
           </div>
         </div>
         <div className="open-search">
