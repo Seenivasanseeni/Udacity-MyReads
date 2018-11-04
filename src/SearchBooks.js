@@ -19,6 +19,7 @@ class SearchBooks extends React.Component {
   updateQuery(queryFromUser){
     const query = queryFromUser.trim();
     this.setState({
+      books:[],
       query:query
     },this.populateSearchResults);
   }
@@ -27,6 +28,7 @@ class SearchBooks extends React.Component {
       this.setState({
           query:''
       })
+      this.populateSearchResults();
   }
 
   populateSearchResults(){
@@ -35,6 +37,9 @@ class SearchBooks extends React.Component {
       //console.log("for query" ,query,"From Network",books);
       if(books==undefined || books.error){
         console.log("No matching Results for query ",query);
+        this.setState({
+          books:[]
+        })
         return;
       }
       this.setState({
