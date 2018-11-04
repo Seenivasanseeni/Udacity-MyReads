@@ -11,6 +11,7 @@ class BooksApp extends React.Component {
     super();
     this.setState=this.setState.bind(this);
     this.updateBook=this.updateBook.bind(this);
+    this.addBook=this.addBook.bind(this);
   }
 
   state = {
@@ -90,7 +91,7 @@ class BooksApp extends React.Component {
         }} />
         <Route path="/search" render={()=>{
           return (
-            <SearchBooks updateBook={this.updateBook}/>
+            <SearchBooks updateBook={this.updateBook} books={this.state.books}/>
           )
         }} />
       </div>

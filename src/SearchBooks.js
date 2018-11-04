@@ -13,13 +13,15 @@ class SearchBooks extends React.Component {
 
   state={
     query:"",
+    curBooks:[],
     books:[]
   }
 
   updateQuery(queryFromUser){
-    const query = queryFromUser.trim();
+    const query = queryFromUser;
     this.setState({
       books:[],
+      curBooks:this.props.books,
       query:query
     },this.populateSearchResults);
   }
@@ -27,13 +29,14 @@ class SearchBooks extends React.Component {
   clearQuery(){
       this.setState({
           books:[],
+          curBooks:this.props.books,
           query:''
       })
       this.populateSearchResults();
   }
 
   populateSearchResults(){
-    const query=this.state.query;
+    const query=this.state.query.trim();
     BooksAPI.search(query).then(books=>{
       //console.log("for query" ,query,"From Network",books);
       if(books==undefined || books.error){
@@ -43,11 +46,26 @@ class SearchBooks extends React.Component {
         })
         return;
       }
+      //synchronize the shelf values
+      books=books.map(book=>{
+        console.log(book.id);
+        var existingBook=this.state.curBooks.filter(curBook=>curBook.id==book.id);
+        if(existingBook.length==1){
+          book.shelf=existingBook[0].shelf;
+        }
+        return book;
+      })
       this.setState({
         books
       })  
     }).catch((err)=>{
       console.log("Error ",err);
+    })
+  }
+  componentDidMount(){
+    console.log(this.props.books);
+    this.setState({
+      books:this.props.books
     })
   }
   
