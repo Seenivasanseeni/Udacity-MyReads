@@ -48,7 +48,6 @@ class SearchBooks extends React.Component {
       }
       //synchronize the shelf values
       books=books.map(book=>{
-        console.log(book.id);
         var existingBook=this.state.curBooks.filter(curBook=>curBook.id==book.id);
         if(existingBook.length==1){
           book.shelf=existingBook[0].shelf;
@@ -60,12 +59,6 @@ class SearchBooks extends React.Component {
       })  
     }).catch((err)=>{
       console.log("Error ",err);
-    })
-  }
-  componentDidMount(){
-    console.log(this.props.books);
-    this.setState({
-      books:this.props.books
     })
   }
   
