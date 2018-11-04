@@ -26,6 +26,7 @@ class SearchBooks extends React.Component {
 
   clearQuery(){
       this.setState({
+          books:[],
           query:''
       })
       this.populateSearchResults();
