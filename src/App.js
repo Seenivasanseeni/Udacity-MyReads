@@ -10,7 +10,7 @@ class BooksApp extends React.Component {
   constructor(){
     super();
     this.setState=this.setState.bind(this);
-    this.refreshApp=this.refreshApp.bind(this);
+    this.updateBook=this.updateBook.bind(this);
   }
 
   state = {
@@ -20,10 +20,38 @@ class BooksApp extends React.Component {
   componentDidMount(){
     this.populateBooks();  
   }
-  
-  refreshApp(){
-    this.populateBooks();    
+
+  addBook(book,shelf){
+    console.log("Adding book");
+    book.shelf=shelf;
+    this.setState(prevState=>{
+      return {
+        books: prevState.books.concat(book)
+      }
+    })
   }
+
+  updateBook(book,shelf){
+    //check if book exists in the state
+    if(this.state.books.filter(bo=>{return bo.id===book.id}).length==0){
+      //book doesnt exist so add it to the state;
+      this.addBook(book,shelf);
+      return
+    }
+    this.setState((prevState)=>{
+      return {
+        books: prevState.books.map(curBook=>{
+          if(curBook.id==book.id){
+            console.log("Book found",book.id,shelf);
+            curBook.shelf=shelf;
+          }
+          return curBook;
+        })
+      } 
+    })
+    console.log("Updating book");
+  }
+  
 
   populateBooks(){
     BooksAPI.getAll().then(books=>{
@@ -45,9 +73,9 @@ class BooksApp extends React.Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} refreshApp={this.refreshApp} />
-            <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" refreshApp={this.refreshApp} />
-            <BookShelf books={readBooks} categoryName={"Read"}  refreshApp={this.refreshApp} />
+            <BookShelf books={wantToReadBooks} categoryName={"Want To Read"} updateBook={this.updateBook} />
+            <BookShelf books={currentlyReadingBooks} categoryName="Currently Reading" updateBook={this.updateBook} />
+            <BookShelf books={readBooks} categoryName={"Read"}  updateBook={this.updateBook} />
           </div>
         </div>
         <div className="open-search">
@@ -62,7 +90,7 @@ class BooksApp extends React.Component {
         }} />
         <Route path="/search" render={()=>{
           return (
-            <SearchBooks refreshApp={this.refreshApp}/>
+            <SearchBooks updateBook={this.updateBook}/>
           )
         }} />
       </div>

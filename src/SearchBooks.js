@@ -71,7 +71,7 @@ class SearchBooks extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
-               <BookShelf categoryName="Search Results" books={this.state.books} refreshApp={this.refreshApp} />
+               <BookShelf categoryName="Search Results" books={this.state.books} updateBook={this.props.updateBook} />
             </div>
           </div>
     )
